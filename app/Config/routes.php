@@ -25,6 +25,8 @@ Router::parseExtensions('json', 'xml');
 
 Router::connect('/robots.txt', array('controller' => 'seo', 'action' => 'robots', 'plugin' => 'seo'));
 
+Router::connect('/admin', array('controller' => 'pages', 'action' => 'home', 'home', 'admin' => true));
+
 /**
  * Here, we are connecting '/' (base path) to controller called 'Pages',
  * its action called 'display', and we pass a param to select the view file
