@@ -28,4 +28,14 @@ App::uses('Shell', 'Console');
  */
 class AppShell extends Shell {
 
+	public function __construct() {
+		parent::__construct();
+		$this->setupColors();
+	}
+
+	protected function setupColors() {
+		$this->stdout->styles('flashy', array('text' => 'magenta', 'blink' => true));
+		$this->stdout->styles('general', array('text' => 'yellow'));
+	}
+	
 }
