@@ -32,4 +32,39 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+	
+	public $components = array(
+		'Session',
+		'RequestHandler',
+	);
+	
+	public $helpers = array(
+		'Html',
+		'Form',
+		'Session',
+		'Time'
+	);
+	
+	public function beforeFilter() {
+		// Handle .ext requests with a dedicated view
+		if($this->RequestHandler->ext == 'json') {
+			$this->viewClass = 'Json';
+		} elseif($this->RequestHandler->ext == 'xml') {
+			$this->viewClass = 'Xml';
+		}
+		
+		// Set admin view when needed
+		if(isset($this->params['admin'])) {
+			$this->layout = 'admin';
+		}
+		
+		// Disable cache and set debug to 0 for Ajax requests
+		if ($this->request->is('ajax')) {
+			$this->disableCache();
+		}
+		
+		// Set the body class
+		$this->set('bodyClass', $this->request->params['controller'].' '.$this->request->params['action']);
+	}
+	
 }
