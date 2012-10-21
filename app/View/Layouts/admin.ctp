@@ -9,7 +9,7 @@
  	<meta charset="utf-8">
 	<!-- Use the .htaccess and remove these lines to avoid edge case issues. More info: h5bp.com/i/378 -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title><?php echo __('{%= module_name %} :: %s', $title_for_layout); ?></title>
+	<title><?php echo $title_for_layout; ?></title>
 	<meta name="description" content="">
 
 	<!-- Mobile viewport optimized: h5bp.com/viewport -->
@@ -18,6 +18,7 @@
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
 	
 	<?php
+	
 	echo $this->Html->css(array(
 			'bootstrap'
 		)
@@ -35,22 +36,59 @@
   
 	<!--<script src="js/libs/modernizr-2.5.3.min.js"></script>-->
 </head>
-<body class="<?php echo isset($bodyClass) ? $bodyClass : ''; ?> container">
+<body class="admin <?php //echo $bodyClass; ?> container">
 
-	<header></header>
+	<header>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<ul class="nav">
+						<li><a href='' class='brand'>Your Project</a></li>
+						<li class="divider-vertical"></li>
+						<?php
+						App::uses('ConnectionManager', 'Model');
+						$db = ConnectionManager::getDataSource('default');
+						$tables = $db->listSources();
+						foreach($tables as $ControllerClass):
+						echo '<li class="dropdown">';
+							//echo $this->Html->link(Inflector::pluralize(Inflector::classify($ControllerClass).' <b class="caret"></b>'), array('controller' => strtolower($ControllerClass), 'action' => 'index'), array('escape' => false, 'class' => 'dropdown-toggle', 'data-toggle' => 'dropdown'));
+						?>
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#"><?php echo Inflector::pluralize(Inflector::classify($ControllerClass)); ?> <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li>
+								<?php echo $this->Html->link('List '.Inflector::pluralize(Inflector::classify($ControllerClass)), array('controller' => strtolower($ControllerClass), 'action' => 'index'));
+								?>
+							</li>
+							<li>
+								<?php echo $this->Html->link('Add '.Inflector::classify($ControllerClass), array('controller' => strtolower($ControllerClass), 'action' => 'add'));
+								?>
+							</li>
+						</ul>
+						<?php
+						echo '</li>';
+						endforeach;
+						?>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
 
 	<div role="main" id="content">
 		<?php echo $this->Session->flash(); ?>
 		<?php echo $this->fetch('content'); ?>
 	</div>
 
-	<footer></footer>
+	<footer>
+		<?php //echo $this->element('sql_dump'); ?>
+		<?php echo $this->Html->image('np_logo.png', array('alt'=>'NoProtocol', 'id' => 'np_logo')); ?>
+	</footer>
 
 	<!-- JavaScript at the bottom for fast page loading -->
 
 	<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="/js/libs/jquery-1.8.2.min.js"><\/script>')</script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 	
 	<?php
 	echo $this->Html->script(array(
