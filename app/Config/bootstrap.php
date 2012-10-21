@@ -134,6 +134,23 @@ Cache::config('default', array('engine' => 'File'));
  */
 
 /**
+ * Bootstrap for the different environments
+ */
+if(isset($_SERVER['APPLICATION_ENV'])) {
+	// Fix for legacy "development" ENV
+	if($_SERVER['APPLICATION_ENV'] == 'development') {
+		$_SERVER['APPLICATION_ENV'] = 'local';
+	}
+	Configure::load('Environment/'.$_SERVER['APPLICATION_ENV']);
+} else {
+	if(isset($_SERVER['SHELL'])) {
+		Configure::load('Environment/local');
+	} else {
+		Configure::load('Environment/production');
+	}
+}
+
+/**
  * Plugins need to be loaded manually, you can either load them one by one or all of them in a single call
  * Uncomment one of the lines below, as you need. make sure you read the documentation on CakePlugin to use more
  * advanced ways of loading plugins
