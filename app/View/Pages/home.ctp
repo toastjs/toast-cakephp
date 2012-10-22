@@ -23,7 +23,7 @@ App::uses('Debugger', 'Utility');
 <hr />
 
 <h1 >Huzar!</h1>
-<h2>{%= module_name %} up and running through ToastJS</h2>
+<h2>{%= project_name %} up and running through ToastJS</h2>
 
 <hr />
 
