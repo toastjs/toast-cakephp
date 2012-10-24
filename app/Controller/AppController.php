@@ -71,7 +71,7 @@ class AppController extends Controller {
 			$this->autoRender = false;
 		}
 		$this->response->header(array(
-			'Access-Control-Allow-Origin' => $_SERVER['HTTP_ORIGIN'],
+			'Access-Control-Allow-Origin' => isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '',
 			'Access-Control-Allow-Credentials' => 'true',
 			'Access-Control-Allow-Methods' => 'PUT, GET, POST, DELETE, OPTIONS',
 			'Access-Control-Allow-Headers' => 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
