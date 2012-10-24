@@ -65,6 +65,20 @@ class AppController extends Controller {
 		
 		// Set the body class
 		$this->set('bodyClass', $this->request->params['controller'].' '.$this->request->params['action']);
+
+		// API Headers and options
+		if($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+			$this->autoRender = false;
+		}
+		$this->response->header(array(
+			'Access-Control-Allow-Origin' => $_SERVER['HTTP_ORIGIN'],
+			'Access-Control-Allow-Credentials' => 'true',
+			'Access-Control-Allow-Methods' => 'PUT, GET, POST, DELETE, OPTIONS',
+			'Access-Control-Allow-Headers' => 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
+			'Access-Control-Max-Age' => '-10',
+			)
+		);
+		
 	}
 	
 }
