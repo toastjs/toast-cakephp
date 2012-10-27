@@ -46,6 +46,8 @@
 
 	<footer></footer>
 
+	<?php echo $this->element('statusbar', array(), array('plugin' => 'Sledgehammer')); ?>
+
 	<!-- JavaScript at the bottom for fast page loading -->
 
 	<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
