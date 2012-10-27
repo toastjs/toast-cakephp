@@ -1,0 +1,10 @@
+{
+  "require": {
+    "cakephp-plugin/sledgehammer": "*",
+    "sledgehammer/core": "*",
+    "sledgehammer/graphics": "*"
+  },
+  "config": {
+    "vendor-dir": "Vendor"
+  }
+}
