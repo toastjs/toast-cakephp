@@ -140,6 +140,8 @@ if(isset($_SERVER['APPLICATION_ENV'])) {
 	// Fix for legacy "development" ENV
 	if($_SERVER['APPLICATION_ENV'] == 'development') {
 		$_SERVER['APPLICATION_ENV'] = 'local';
+		// Setting ENVIRONMENT for Sledgehammer
+		define('ENVIRONMENT', 'development');
 	}
 	Configure::load('Environment/'.$_SERVER['APPLICATION_ENV']);
 } else {
@@ -159,7 +161,6 @@ if(isset($_SERVER['APPLICATION_ENV'])) {
  * CakePlugin::load('DebugKit'); //Loads a single plugin named DebugKit
  *
  */
-
 CakePlugin::loadAll(
     array(
     	'Sledgehammer' => array('bootstrap' => true)
