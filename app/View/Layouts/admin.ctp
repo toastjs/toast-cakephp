@@ -93,16 +93,11 @@
 	<?php
 	echo $this->Html->script(array(
 			'libs/bootstrap.min',
-			'app'
+			// 'app'
 		)
 	);
 	echo $this->fetch('script');
 	?>
-
-	<!-- scripts concatenated and minified via build script -->
-	<!-- <script src="js/plugins.js"></script>
-	<script src="js/script.js"></script> -->
-	<!-- end scripts -->
 
 	<!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
 	mathiasbynens.be/notes/async-analytics-snippet -->
